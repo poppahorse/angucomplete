@@ -95,6 +95,11 @@ angular.module('angucomplete', [] )
                             image: image,
                             originalObject: responseData[i]
                         }
+                        
+                        // if a single result, force the result incase user doesn't press the autocomplete
+                    	if (responseData.length == 1) {
+                    		$scope.selectResult(resultRow, true); // select result but keep autocomplete open
+                    	}
 
                         $scope.results[$scope.results.length] = resultRow;
                     }
@@ -184,13 +189,13 @@ angular.module('angucomplete', [] )
                 }
             }
 
-            $scope.selectResult = function(result) {
+            $scope.selectResult = function(result, showDropdown) {
                 if ($scope.matchClass) {
                     result.title = result.title.toString().replace(/(<([^>]+)>)/ig, '');
                 }
                 $scope.searchStr = $scope.lastSearchTerm = result.title;
                 $scope.selectedObject = result;
-                $scope.showDropdown = false;
+                if (typeof showDropdown === 'undefined') { $scope.showDropdown = false; } // optionally keep autocomplete open
                 $scope.results = [];
                 //$scope.$apply();
             }
