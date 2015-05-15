@@ -95,11 +95,6 @@ angular.module('angucomplete', [] )
                             image: image,
                             originalObject: responseData[i]
                         }
-                        
-                        // if a single result, force the result incase user doesn't press the autocomplete
-                    	if (responseData.length == 1) {
-                    		$scope.selectResult(resultRow, true); // select result but keep autocomplete open
-                    	}
 
                         $scope.results[$scope.results.length] = resultRow;
                     }
@@ -149,6 +144,12 @@ angular.module('angucomplete', [] )
 
             $scope.hideResults = function() {
                 $scope.hideTimer = $timeout(function() {
+                    // if a single result, force the result incase user doesn't press the autocomplete
+                	
+                	if ($scope.results.length == 1) {
+                		$scope.selectResult($scope.results[0], true);
+                	}
+                	
                     $scope.showDropdown = false;
                 }, $scope.pause);
             };
