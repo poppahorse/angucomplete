@@ -144,9 +144,9 @@ angular.module('angucomplete', [] )
 
             $scope.hideResults = function() {
                 $scope.hideTimer = $timeout(function() {
-                    // if a single result, force the result incase user doesn't press the autocomplete
+                    // if no object selected, on blur pick the top one from the list
                 	
-                	if ($scope.results.length == 1) {
+                	if ($scope.selectedObject == null) {
                 		$scope.selectResult($scope.results[0], true);
                 	}
                 	
