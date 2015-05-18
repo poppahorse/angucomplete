@@ -224,6 +224,9 @@ angular.module('angucomplete', [] )
                     }
 
                 } else if (event.which == 13) {
+                	if ($scope.currentIndex == -1 && $scope.results.length > 0) {
+                		 $scope.currentIndex = 0;
+                	}
                     if ($scope.results && $scope.currentIndex >= 0 && $scope.currentIndex < $scope.results.length) {
                         $scope.selectResult($scope.results[$scope.currentIndex]);
                         $scope.$apply();
